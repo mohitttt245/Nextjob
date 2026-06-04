@@ -1,0 +1,36 @@
+<svg width="900" height="1200" viewBox="0 0 900 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="1200" fill="#F7FAFC"/>
+  <rect x="70" y="60" width="760" height="1080" rx="28" fill="white"/>
+  <rect x="70" y="60" width="760" height="150" rx="28" fill="#0F766E"/>
+  <text x="120" y="135" fill="white" font-size="42" font-family="Arial, sans-serif" font-weight="700">Your Name</text>
+  <text x="120" y="175" fill="#CCFBF1" font-size="18" font-family="Arial, sans-serif">Frontend Developer  |  your@email.com  |  +91 98765 43210</text>
+  <text x="120" y="205" fill="#CCFBF1" font-size="18" font-family="Arial, sans-serif">linkedin.com/in/yourprofile  |  github.com/yourhandle</text>
+
+  <text x="120" y="285" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">SUMMARY</text>
+  <rect x="120" y="298" width="100" height="4" rx="2" fill="#F97316"/>
+  <text x="120" y="340" fill="#334155" font-size="18" font-family="Arial, sans-serif">Results-driven developer with experience building responsive products, APIs,</text>
+  <text x="120" y="370" fill="#334155" font-size="18" font-family="Arial, sans-serif">and scalable user interfaces. Tailor this summary to reflect measurable impact.</text>
+
+  <text x="120" y="450" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">EXPERIENCE</text>
+  <rect x="120" y="463" width="120" height="4" rx="2" fill="#F97316"/>
+  <text x="120" y="515" fill="#0F172A" font-size="20" font-family="Arial, sans-serif" font-weight="700">Frontend Engineer</text>
+  <text x="600" y="515" fill="#475569" font-size="18" font-family="Arial, sans-serif">2024 - Present</text>
+  <text x="120" y="545" fill="#0F766E" font-size="18" font-family="Arial, sans-serif">Company Name, Bengaluru</text>
+  <text x="140" y="585" fill="#334155" font-size="17" font-family="Arial, sans-serif">• Built reusable UI modules that improved product delivery speed by 30%.</text>
+  <text x="140" y="615" fill="#334155" font-size="17" font-family="Arial, sans-serif">• Collaborated with design and backend teams to ship polished customer flows.</text>
+  <text x="140" y="645" fill="#334155" font-size="17" font-family="Arial, sans-serif">• Improved accessibility, performance, and component documentation.</text>
+
+  <text x="120" y="735" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">PROJECTS</text>
+  <rect x="120" y="748" width="100" height="4" rx="2" fill="#F97316"/>
+  <text x="120" y="800" fill="#0F172A" font-size="20" font-family="Arial, sans-serif" font-weight="700">Job Portal Platform</text>
+  <text x="140" y="840" fill="#334155" font-size="17" font-family="Arial, sans-serif">• Designed a full-stack hiring portal with admin workflows and AI prep tools.</text>
+  <text x="140" y="870" fill="#334155" font-size="17" font-family="Arial, sans-serif">• Stack: React, Tailwind CSS, Node.js, Express, MongoDB Atlas.</text>
+
+  <text x="120" y="955" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">SKILLS</text>
+  <rect x="120" y="968" width="75" height="4" rx="2" fill="#F97316"/>
+  <text x="120" y="1020" fill="#334155" font-size="18" font-family="Arial, sans-serif">React, Node.js, Express.js, MongoDB, Tailwind CSS, REST APIs, Git, AWS</text>
+
+  <text x="120" y="1085" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">EDUCATION</text>
+  <rect x="120" y="1098" width="110" height="4" rx="2" fill="#F97316"/>
+  <text x="120" y="1140" fill="#334155" font-size="18" font-family="Arial, sans-serif">B.Tech in Computer Science | University Name | 2020 - 2024</text>
+</svg>

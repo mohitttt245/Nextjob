@@ -1,0 +1,47 @@
+<svg width="900" height="1200" viewBox="0 0 900 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="1200" fill="#FFFDF8"/>
+  <rect x="90" y="55" width="720" height="1090" rx="24" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <rect x="90" y="55" width="210" height="1090" rx="24" fill="#F97316"/>
+  <text x="135" y="145" fill="white" font-size="38" font-family="Arial, sans-serif" font-weight="700">Your Name</text>
+  <text x="135" y="185" fill="#FFEDD5" font-size="18" font-family="Arial, sans-serif">Aspiring Product Analyst</text>
+
+  <text x="135" y="270" fill="white" font-size="20" font-family="Arial, sans-serif" font-weight="700">CONTACT</text>
+  <text x="135" y="315" fill="#FFF7ED" font-size="16" font-family="Arial, sans-serif">your@email.com</text>
+  <text x="135" y="345" fill="#FFF7ED" font-size="16" font-family="Arial, sans-serif">+91 98765 43210</text>
+  <text x="135" y="375" fill="#FFF7ED" font-size="16" font-family="Arial, sans-serif">linkedin.com/in/you</text>
+  <text x="135" y="405" fill="#FFF7ED" font-size="16" font-family="Arial, sans-serif">portfolio.example.com</text>
+
+  <text x="135" y="500" fill="white" font-size="20" font-family="Arial, sans-serif" font-weight="700">SKILLS</text>
+  <text x="135" y="545" fill="#FFF7ED" font-size="16" font-family="Arial, sans-serif">Excel</text>
+  <text x="135" y="575" fill="#FFF7ED" font-size="16" font-family="Arial, sans-serif">SQL</text>
+  <text x="135" y="605" fill="#FFF7ED" font-size="16" font-family="Arial, sans-serif">Presentation</text>
+  <text x="135" y="635" fill="#FFF7ED" font-size="16" font-family="Arial, sans-serif">Stakeholder Updates</text>
+  <text x="135" y="665" fill="#FFF7ED" font-size="16" font-family="Arial, sans-serif">Problem Solving</text>
+
+  <text x="340" y="145" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">PROFILE</text>
+  <rect x="340" y="158" width="95" height="4" rx="2" fill="#0F766E"/>
+  <text x="340" y="205" fill="#334155" font-size="18" font-family="Arial, sans-serif">Use this profile to summarize your strengths, target role, and impact in 2 to 3 lines.</text>
+
+  <text x="340" y="315" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">EXPERIENCE</text>
+  <rect x="340" y="328" width="120" height="4" rx="2" fill="#0F766E"/>
+  <text x="340" y="380" fill="#0F172A" font-size="19" font-family="Arial, sans-serif" font-weight="700">Operations Intern</text>
+  <text x="620" y="380" fill="#64748B" font-size="17" font-family="Arial, sans-serif">Jan 2026 - May 2026</text>
+  <text x="340" y="410" fill="#F97316" font-size="17" font-family="Arial, sans-serif">SignalSpring</text>
+  <text x="360" y="450" fill="#334155" font-size="16" font-family="Arial, sans-serif">• Created weekly dashboards and reduced reporting time by 20%.</text>
+  <text x="360" y="478" fill="#334155" font-size="16" font-family="Arial, sans-serif">• Coordinated with product and support teams to track user issues.</text>
+  <text x="360" y="506" fill="#334155" font-size="16" font-family="Arial, sans-serif">• Presented insights to mentors using concise storytelling and metrics.</text>
+
+  <text x="340" y="610" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">PROJECTS</text>
+  <rect x="340" y="623" width="96" height="4" rx="2" fill="#0F766E"/>
+  <text x="340" y="675" fill="#0F172A" font-size="19" font-family="Arial, sans-serif" font-weight="700">Hiring Funnel Analysis</text>
+  <text x="360" y="715" fill="#334155" font-size="16" font-family="Arial, sans-serif">• Built a candidate conversion dashboard and identified major drop-off stages.</text>
+  <text x="360" y="743" fill="#334155" font-size="16" font-family="Arial, sans-serif">• Recommended actions that improved interview completion rates.</text>
+
+  <text x="340" y="845" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">EDUCATION</text>
+  <rect x="340" y="858" width="110" height="4" rx="2" fill="#0F766E"/>
+  <text x="340" y="910" fill="#334155" font-size="17" font-family="Arial, sans-serif">BBA / B.Com / B.Tech | University Name | 2022 - 2026</text>
+
+  <text x="340" y="1005" fill="#0F172A" font-size="22" font-family="Arial, sans-serif" font-weight="700">CERTIFICATIONS</text>
+  <rect x="340" y="1018" width="145" height="4" rx="2" fill="#0F766E"/>
+  <text x="340" y="1070" fill="#334155" font-size="17" font-family="Arial, sans-serif">Google Data Analytics | Excel for Business | SQL Basics</text>
+</svg>

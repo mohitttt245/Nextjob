@@ -1,0 +1,19 @@
+{
+  "name": "nextjob-portal",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace nextjob-backend",
+    "dev:frontend": "npm run dev --workspace nextjob-frontend",
+    "build": "npm run build --workspace nextjob-frontend",
+    "seed": "npm run seed --workspace nextjob-backend",
+    "start": "npm run start --workspace nextjob-backend"
+  },
+  "dependencies": {
+    "mongodb": "^7.2.0"
+  }
+}
