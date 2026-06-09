@@ -1,13 +1,12 @@
 import { ExternalLink, X } from "lucide-react";
 
-const PreviewModal = ({ item, onClose, assetBaseUrl }) => {
+const PreviewModal = ({ item, onClose }) => {
   if (!item) {
     return null;
   }
 
-  const fileUrl = item.fileUrl?.startsWith("http")
-    ? item.fileUrl
-    : `${assetBaseUrl || ""}${item.fileUrl}`;
+  // ← simplified, always a full Cloudinary URL now
+  const fileUrl = item.fileUrl;
   const isPdf = item.fileType?.includes("pdf");
   const isImage = item.fileType?.startsWith("image/");
 
@@ -44,12 +43,12 @@ const PreviewModal = ({ item, onClose, assetBaseUrl }) => {
         </div>
 
         <div className="mt-5 flex justify-end">
-          <a
+          
             href={fileUrl}
             target="_blank"
             rel="noreferrer"
             className="btn-primary"
-          >
+          <a>
             Open File <ExternalLink size={16} />
           </a>
         </div>

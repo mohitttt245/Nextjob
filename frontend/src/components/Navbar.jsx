@@ -28,7 +28,7 @@ const Navbar = () => {
   const navigation = [
     ...baseNavigation,
     {
-      // label: isAuthenticated ? "Admin" : "Admin Login",
+      label: isAuthenticated ? "Admin" : "Admin Login",
       to: isAuthenticated ? "/admin" : "/admin/login"
     }
   ];

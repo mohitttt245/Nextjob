@@ -9,6 +9,7 @@ import jobRoutes from "./routes/jobRoutes.js";
 import internshipRoutes from "./routes/internshipRoutes.js";
 import resumeTemplateRoutes from "./routes/resumeTemplateRoutes.js";
 import interviewRoutes from "./routes/interviewRoutes.js";
+import downloadRoute from "./routes/downloadRoute.js";
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ app.use("/api/jobs", jobRoutes);
 app.use("/api/internships", internshipRoutes);
 app.use("/api/resume-templates", resumeTemplateRoutes);
 app.use("/api/interviews", interviewRoutes);
+app.use("/api", downloadRoute);        // ← moved here, after app is initialized
 
 app.use(notFound);
 app.use(errorHandler);

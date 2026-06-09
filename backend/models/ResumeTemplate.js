@@ -9,7 +9,9 @@ const resumeTemplateSchema = new mongoose.Schema(
     fileUrl: { type: String, required: true, trim: true },
     fileType: { type: String, required: true, trim: true },
     size: { type: Number, default: 0 },
-    isFeatured: { type: Boolean, default: false }
+    isFeatured: { type: Boolean, default: false },
+    publicId: { type: String },        // Cloudinary public ID
+    resourceType: { type: String },    // "image" or "raw"
   },
   { timestamps: true }
 );

@@ -1,26 +1,14 @@
-import fs from "fs/promises";
-import path from "path";
 import asyncHandler from "../middleware/asyncHandler.js";
-import { templateUploadsDir } from "../config/paths.js";
+import { cloudinary } from "../config/cloudinary.js";
 import { parseBoolean } from "./opportunityUtils.js";
 import ResumeTemplate from "../models/ResumeTemplate.js";
 
-const removeFileIfExists = async (fileUrl) => {
-  if (!fileUrl?.startsWith("/uploads/templates/")) {
-    return;
-  }
-
-  const filePath = path.resolve(
-    templateUploadsDir,
-    fileUrl.replace("/uploads/templates/", "")
-  );
-
+const removeFileFromCloudinary = async (publicId, resourceType) => {
+  if (!publicId) return;
   try {
-    await fs.unlink(filePath);
+    await cloudinary.uploader.destroy(publicId, { resource_type: resourceType });
   } catch (error) {
-    if (error.code !== "ENOENT") {
-      throw error;
-    }
+    console.error("Cloudinary delete error:", error);
   }
 };
 
@@ -30,19 +18,25 @@ const getResumeTemplates = asyncHandler(async (_req, res) => {
 });
 
 const createResumeTemplate = asyncHandler(async (req, res) => {
-  if (!req.file) {
+  const manualUrl = req.body.fileUrl?.trim();
+
+  if (!manualUrl && !req.file) {
     res.status(400);
-    throw new Error("Template file is required.");
+    throw new Error("Provide either a Cloudinary URL or upload a file.");
   }
 
+  const isUpload = !manualUrl && req.file;
+
   const template = await ResumeTemplate.create({
-    title: req.body.title?.trim() || req.file.originalname,
+    title: req.body.title?.trim() || req.file?.originalname || "Untitled",
     category: req.body.category?.trim() || "General",
     description: req.body.description?.trim() || "",
-    fileName: req.file.originalname,
-    fileUrl: `/uploads/templates/${req.file.filename}`,
-    fileType: req.file.mimetype,
-    size: req.file.size,
+    fileName: isUpload ? req.file.originalname : manualUrl,
+    fileUrl: isUpload ? req.file.path : manualUrl,
+    publicId: isUpload ? req.file.filename : null,
+    resourceType: isUpload ? "raw" : null,
+    fileType: isUpload ? req.file.mimetype : "application/pdf",
+    size: isUpload ? req.file.size : null,
     isFeatured: parseBoolean(req.body.isFeatured)
   });
 
@@ -57,12 +51,29 @@ const updateResumeTemplate = asyncHandler(async (req, res) => {
     throw new Error("Resume template not found.");
   }
 
+  const manualUrl = req.body.fileUrl?.trim();
+
   if (req.file) {
-    await removeFileIfExists(template.fileUrl);
+    if (template.publicId) {
+      await removeFileFromCloudinary(template.publicId, template.resourceType);
+    }
     template.fileName = req.file.originalname;
-    template.fileUrl = `/uploads/templates/${req.file.filename}`;
+    template.fileUrl = req.file.path;
+    template.publicId = req.file.filename;
+    template.resourceType = "raw";
     template.fileType = req.file.mimetype;
     template.size = req.file.size;
+
+  } else if (manualUrl && manualUrl !== template.fileUrl) {
+    if (template.publicId) {
+      await removeFileFromCloudinary(template.publicId, template.resourceType);
+    }
+    template.fileName = manualUrl;
+    template.fileUrl = manualUrl;
+    template.publicId = null;
+    template.resourceType = null;
+    template.fileType = "application/pdf";
+    template.size = null;
   }
 
   template.title = req.body.title?.trim() || template.title;
@@ -85,7 +96,7 @@ const deleteResumeTemplate = asyncHandler(async (req, res) => {
     throw new Error("Resume template not found.");
   }
 
-  await removeFileIfExists(template.fileUrl);
+  await removeFileFromCloudinary(template.publicId, template.resourceType);
   await template.deleteOne();
 
   res.json({ message: "Resume template deleted successfully." });

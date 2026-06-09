@@ -62,6 +62,7 @@ const blankTemplateForm = {
   title: "",
   category: "",
   description: "",
+  fileUrl:"",
   isFeatured: false,
   templateFile: null
 };
@@ -213,6 +214,7 @@ const AdminDashboardPage = () => {
       formData.append("title", templateForm.title);
       formData.append("category", templateForm.category);
       formData.append("description", templateForm.description);
+      formData.append("fileUrl", templateForm.fileUrl);
       formData.append("isFeatured", String(templateForm.isFeatured));
 
       if (templateForm.templateFile) {
@@ -223,8 +225,9 @@ const AdminDashboardPage = () => {
         await updateResumeTemplate(templateForm.id, formData);
         setSuccessNotice("Resume template updated successfully.");
       } else {
-        if (!templateForm.templateFile) {
-          throw new Error("Template file is required for a new upload.");
+        // Allow either a file upload OR a pasted Cloudinary URL
+        if (!templateForm.templateFile && !templateForm.fileUrl?.trim()) {
+          throw new Error("Please upload a file or paste a Cloudinary URL.");
         }
 
         await createResumeTemplate(formData);
@@ -407,6 +410,7 @@ const AdminDashboardPage = () => {
               title: item.title,
               category: item.category,
               description: item.description,
+              fileUrl: item.fileUrl,
               isFeatured: Boolean(item.isFeatured),
               templateFile: null
             })
@@ -471,7 +475,7 @@ const AdminDashboardPage = () => {
         {renderActiveSection()}
       </div>
 
-      <PreviewModal item={previewItem} onClose={() => setPreviewItem(null)} assetBaseUrl={assetBaseUrl} />
+      <PreviewModal item={previewItem} onClose={() => setPreviewItem(null)} />
     </div>
   );
 };

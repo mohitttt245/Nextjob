@@ -1,24 +1,5 @@
-import fs from "fs";
 import multer from "multer";
-import { templateUploadsDir } from "../config/paths.js";
-
-fs.mkdirSync(templateUploadsDir, { recursive: true });
-
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => {
-    cb(null, templateUploadsDir);
-  },
-  filename: (_req, file, cb) => {
-    const extension = path.extname(file.originalname);
-    const safeName = file.originalname
-      .replace(extension, "")
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "");
-
-    cb(null, `${Date.now()}-${safeName}${extension}`);
-  }
-});
+import { storage } from "../config/cloudinary.js";
 
 const fileFilter = (_req, file, cb) => {
   const allowedTypes = [
@@ -39,7 +20,7 @@ const fileFilter = (_req, file, cb) => {
 };
 
 const upload = multer({
-  storage,
+  storage,          // ← Cloudinary storage instead of diskStorage
   fileFilter,
   limits: { fileSize: 5 * 1024 * 1024 }
 });

@@ -3,6 +3,26 @@ import AdminSectionPanel from "./AdminSectionPanel";
 import InputField from "./InputField";
 import TextAreaField from "./TextAreaField";
 
+const handleDownload = async (fileUrl, title) => {
+  try {
+    const apiBase = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+    const params = new URLSearchParams({
+      url: fileUrl,
+      filename: `${title}.pdf`
+    });
+    const downloadUrl = `${apiBase}/download?${params.toString()}`;
+
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.download = `${title}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch {
+    window.open(fileUrl, "_blank");
+  }
+};
+
 const ResumeTemplateManager = ({
   templates,
   form,
@@ -13,7 +33,6 @@ const ResumeTemplateManager = ({
   onDelete,
   onCancel,
   onPreview,
-  assetBaseUrl,
   busy
 }) => (
   <AdminSectionPanel
@@ -42,6 +61,8 @@ const ResumeTemplateManager = ({
           onChange={(event) => onChange("description", event.target.value)}
           placeholder="What kind of candidate should use this template?"
         />
+
+        {/* File upload */}
         <label className="block">
           <span className="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-200">
             Template File
@@ -53,6 +74,15 @@ const ResumeTemplateManager = ({
             </p>
           </div>
         </label>
+
+        {/* Cloudinary URL paste */}
+        <InputField
+          label="Or paste Cloudinary URL"
+          value={form.fileUrl || ""}
+          onChange={(event) => onChange("fileUrl", event.target.value)}
+          placeholder="https://res.cloudinary.com/your-cloud/raw/upload/..."
+        />
+
         <label className="inline-flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200">
           <input
             type="checkbox"
@@ -77,9 +107,7 @@ const ResumeTemplateManager = ({
 
       <div className="space-y-4">
         {templates.map((template) => {
-          const fileUrl = template.fileUrl?.startsWith("http")
-            ? template.fileUrl
-            : `${assetBaseUrl || ""}${template.fileUrl}`;
+          const fileUrl = template.fileUrl;
 
           return (
             <article key={template._id} className="rounded-[24px] border border-slate-200 bg-white/75 p-5 dark:border-slate-800 dark:bg-slate-950/40">
@@ -117,9 +145,13 @@ const ResumeTemplateManager = ({
                 <a href={fileUrl} target="_blank" rel="noreferrer" className="btn-secondary">
                   <Eye size={16} /> Preview
                 </a>
-                <a href={fileUrl} download className="btn-primary">
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={() => handleDownload(fileUrl, template.title)}
+                >
                   <Download size={16} /> Download
-                </a>
+                </button>
               </div>
             </article>
           );
