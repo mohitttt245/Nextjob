@@ -46,15 +46,11 @@ const ResumeBuilderPage = () => {
         description="Capture only the fields that matter, keep the content skimmable, and download a recruiter-ready layout in one click."
       />
 
-      <div className="grid gap-8 xl:grid-cols-[0.95fr_1.05fr]">
-        <section className="glass-panel-strong p-6 sm:p-8">
+      <div className="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+        <section className="glass-panel-strong p-5 sm:p-8">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">Resume Details</h3>
-            <button
-              type="button"
-              className="btn-secondary"
-              onClick={() => setResume(sampleResume)}
-            >
+            <h3 className="text-xl font-semibold text-slate-950 dark:text-white sm:text-2xl">Resume Details</h3>
+            <button type="button" className="btn-secondary w-full sm:w-auto" onClick={() => setResume(sampleResume)}>
               <Wand2 size={16} />
               Load Sample
             </button>
@@ -92,26 +88,22 @@ const ResumeBuilderPage = () => {
               placeholder="One project or impact statement per line"
             />
 
-            <button
-              type="button"
-              onClick={() => downloadResumePdf(resume)}
-              className="btn-primary mt-2"
-            >
+            <button type="button" onClick={() => downloadResumePdf(resume)} className="btn-primary mt-2 w-full sm:w-auto">
               <Download size={16} />
               Download PDF Resume
             </button>
           </div>
         </section>
 
-        <section className="glass-panel-strong p-6 sm:p-8">
-          <div className="flex items-center justify-between gap-3">
-            <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">ATS Preview</h3>
+        <section className="glass-panel-strong p-5 sm:p-8">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <h3 className="text-xl font-semibold text-slate-950 dark:text-white sm:text-2xl">ATS Preview</h3>
             <span className="tag-pill">Single-column format</span>
           </div>
 
-          <div className="mt-6 rounded-[28px] border border-slate-200 bg-white p-8 text-slate-900 shadow-ambient dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100">
+          <div className="mt-6 rounded-[28px] border border-slate-200 bg-white p-5 text-slate-900 shadow-ambient dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 sm:p-8">
             <div className="border-b border-slate-200 pb-6 dark:border-slate-800">
-              <h1 className="text-3xl font-semibold">{resume.name || "Your Name"}</h1>
+              <h1 className="break-words text-2xl font-semibold sm:text-3xl">{resume.name || "Your Name"}</h1>
               <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
                 Tailor this resume with strong role-specific keywords and measurable impact.
               </p>
@@ -130,14 +122,12 @@ const ResumeBuilderPage = () => {
                 <div className="mt-3 space-y-3">
                   {splitMultiline(section.value).length ? (
                     splitMultiline(section.value).map((line) => (
-                      <p key={line} className="text-sm leading-6 text-slate-700 dark:text-slate-200">
+                      <p key={line} className="break-words text-sm leading-6 text-slate-700 dark:text-slate-200">
                         • {line}
                       </p>
                     ))
                   ) : (
-                    <p className="text-sm text-slate-400 dark:text-slate-500">
-                      Add details to this section.
-                    </p>
+                    <p className="text-sm text-slate-400 dark:text-slate-500">Add details to this section.</p>
                   )}
                 </div>
               </div>

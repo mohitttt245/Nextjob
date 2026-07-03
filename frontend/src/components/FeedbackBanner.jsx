@@ -12,7 +12,7 @@ const FeedbackBanner = ({ type = "info", message }) => {
   }
 
   return (
-    <div className={`rounded-2xl border px-4 py-3 text-sm font-medium ${toneClasses[type]}`}>
+    <div className={`rounded-2xl border px-4 py-3 text-sm font-medium break-words ${toneClasses[type]}`}>
       {message}
     </div>
   );

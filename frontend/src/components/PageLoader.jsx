@@ -1,7 +1,7 @@
 const PageLoader = ({ count = 3 }) => (
-  <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+  <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
     {Array.from({ length: count }).map((_, index) => (
-      <div key={index} className="glass-panel overflow-hidden p-6">
+      <div key={index} className="glass-panel overflow-hidden p-5 sm:p-6">
         <div className="h-4 w-24 rounded-full bg-slate-200 dark:bg-slate-800" />
         <div className="mt-4 h-8 w-3/4 rounded-full bg-slate-200 dark:bg-slate-800" />
         <div className="mt-3 h-4 w-1/2 rounded-full bg-slate-200 dark:bg-slate-800" />

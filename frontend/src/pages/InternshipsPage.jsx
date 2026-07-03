@@ -48,12 +48,13 @@ const InternshipsPage = () => {
         description="Students and freshers can review stipend, deadline, location, and required skills before jumping to the external application link."
       />
 
-      <div className="glass-panel flex items-center gap-3 px-4 py-3">
+      <div className="glass-panel flex items-center gap-3 px-4 py-3 sm:px-5">
         <Search size={18} className="text-slate-400" />
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search internships by role, company, location, or skill"
+          aria-label="Search internships"
           className="w-full bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:text-slate-100"
         />
       </div>

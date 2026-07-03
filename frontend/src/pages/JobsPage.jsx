@@ -48,12 +48,13 @@ const JobsPage = () => {
         description="Search across titles, companies, locations, and skills. Every card routes users to the external application portal chosen by the admin."
       />
 
-      <div className="glass-panel flex items-center gap-3 px-4 py-3">
+      <div className="glass-panel flex items-center gap-3 px-4 py-3 sm:px-5">
         <Search size={18} className="text-slate-400" />
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search jobs by role, company, location, or skill"
+          aria-label="Search jobs"
           className="w-full bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:text-slate-100"
         />
       </div>

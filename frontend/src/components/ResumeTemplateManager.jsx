@@ -39,7 +39,7 @@ const ResumeTemplateManager = ({
     title="Resume Templates"
     description="Upload downloadable resume templates that users can preview and save."
   >
-    <div className="grid gap-8 xl:grid-cols-[1fr_1fr]">
+    <div className="grid gap-6 2xl:grid-cols-[1fr_1fr]">
       <form className="grid gap-4" onSubmit={onSubmit}>
         <InputField
           label="Template Title"
@@ -62,20 +62,22 @@ const ResumeTemplateManager = ({
           placeholder="What kind of candidate should use this template?"
         />
 
-        {/* File upload */}
         <label className="block">
           <span className="mb-2 block text-sm font-semibold text-slate-700 dark:text-slate-200">
             Template File
           </span>
           <div className="rounded-[24px] border border-dashed border-slate-300 bg-white/70 p-5 dark:border-slate-700 dark:bg-slate-950/40">
-            <input type="file" onChange={onFileChange} className="field cursor-pointer border-none bg-transparent px-0 py-0 shadow-none" />
+            <input
+              type="file"
+              onChange={onFileChange}
+              className="field cursor-pointer border-none bg-transparent px-0 py-0 shadow-none"
+            />
             <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
               Upload PDF, DOC, DOCX, PNG, JPG, or SVG files. Existing file stays unless you replace it.
             </p>
           </div>
         </label>
 
-        {/* Cloudinary URL paste */}
         <InputField
           label="Or paste Cloudinary URL"
           value={form.fileUrl || ""}
@@ -92,13 +94,14 @@ const ResumeTemplateManager = ({
           />
           Feature this template
         </label>
-        <div className="flex flex-wrap gap-3">
-          <button type="submit" className="btn-primary" disabled={busy}>
+
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <button type="submit" className="btn-primary w-full sm:w-auto" disabled={busy}>
             <Upload size={16} />
             {busy ? "Saving..." : form.id ? "Update Template" : "Upload Template"}
           </button>
           {form.id ? (
-            <button type="button" className="btn-secondary" onClick={onCancel}>
+            <button type="button" className="btn-secondary w-full sm:w-auto" onClick={onCancel}>
               Cancel Edit
             </button>
           ) : null}
@@ -106,56 +109,67 @@ const ResumeTemplateManager = ({
       </form>
 
       <div className="space-y-4">
-        {templates.map((template) => {
-          const fileUrl = template.fileUrl;
+        {templates.length ? (
+          templates.map((template) => {
+            const fileUrl = template.fileUrl;
 
-          return (
-            <article key={template._id} className="rounded-[24px] border border-slate-200 bg-white/75 p-5 dark:border-slate-800 dark:bg-slate-950/40">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h4 className="text-lg font-semibold text-slate-950 dark:text-white">{template.title}</h4>
-                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{template.category}</p>
+            return (
+              <article
+                key={template._id}
+                className="rounded-[24px] border border-slate-200 bg-white/75 p-4 dark:border-slate-800 dark:bg-slate-950/40 sm:p-5"
+              >
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="min-w-0">
+                    <h4 className="text-lg font-semibold text-slate-950 dark:text-white">{template.title}</h4>
+                    <p className="mt-1 break-words text-sm text-slate-500 dark:text-slate-400">
+                      {template.category}
+                    </p>
+                  </div>
+                  <div className="flex self-start gap-2">
+                    <button
+                      type="button"
+                      onClick={() => onPreview(template)}
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 text-slate-600 dark:border-slate-700 dark:text-slate-200"
+                    >
+                      <Eye size={16} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => onEdit(template)}
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 text-slate-600 dark:border-slate-700 dark:text-slate-200"
+                    >
+                      <Pencil size={16} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => onDelete(template._id)}
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-rose-200 text-rose-600 dark:border-rose-500/30 dark:text-rose-300"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
                 </div>
-                <div className="flex gap-2">
+                <p className="mt-3 break-words text-sm text-slate-600 dark:text-slate-300">{template.description}</p>
+                <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <a href={fileUrl} target="_blank" rel="noreferrer" className="btn-secondary w-full sm:w-auto">
+                    <Eye size={16} /> Preview
+                  </a>
                   <button
                     type="button"
-                    onClick={() => onPreview(template)}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 dark:border-slate-700 dark:text-slate-200"
+                    className="btn-primary w-full sm:w-auto"
+                    onClick={() => handleDownload(fileUrl, template.title)}
                   >
-                    <Eye size={16} />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => onEdit(template)}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 dark:border-slate-700 dark:text-slate-200"
-                  >
-                    <Pencil size={16} />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => onDelete(template._id)}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-rose-200 text-rose-600 dark:border-rose-500/30 dark:text-rose-300"
-                  >
-                    <Trash2 size={16} />
+                    <Download size={16} /> Download
                   </button>
                 </div>
-              </div>
-              <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">{template.description}</p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <a href={fileUrl} target="_blank" rel="noreferrer" className="btn-secondary">
-                  <Eye size={16} /> Preview
-                </a>
-                <button
-                  type="button"
-                  className="btn-primary"
-                  onClick={() => handleDownload(fileUrl, template.title)}
-                >
-                  <Download size={16} /> Download
-                </button>
-              </div>
-            </article>
-          );
-        })}
+              </article>
+            );
+          })
+        ) : (
+          <div className="rounded-[24px] border border-dashed border-slate-300 px-5 py-10 text-center text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400">
+            No templates uploaded yet.
+          </div>
+        )}
       </div>
     </div>
   </AdminSectionPanel>

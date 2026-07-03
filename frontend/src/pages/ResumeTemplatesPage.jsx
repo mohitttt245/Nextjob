@@ -77,7 +77,7 @@ const ResumeTemplatesPage = () => {
       {loading ? (
         <PageLoader count={4} />
       ) : templates.length ? (
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {templates.map((template) => {
             const fileUrl = template.fileUrl;
             const isPdf = template.fileType?.includes("pdf");
@@ -86,53 +86,49 @@ const ResumeTemplatesPage = () => {
             const showFallback = failedThumbnails.has(template._id);
 
             return (
-              <article key={template._id} className="glass-panel flex flex-col p-6">
+              <article key={template._id} className="glass-panel flex flex-col p-5 sm:p-6">
                 <div className="rounded-[24px] border border-slate-200 bg-slate-100 p-3 dark:border-slate-800 dark:bg-slate-950/40">
                   {isImage ? (
-                    <img
-                      src={fileUrl}
-                      alt={template.title}
-                      className="h-56 w-full rounded-[18px] object-cover object-top"
-                    />
+                    <img src={fileUrl} alt={template.title} className="h-48 w-full rounded-[18px] object-cover object-top sm:h-56" />
                   ) : isPdf && thumbnailUrl && !showFallback ? (
                     <img
                       src={thumbnailUrl}
                       alt={template.title}
-                      className="h-56 w-full rounded-[18px] object-cover object-top"
+                      className="h-48 w-full rounded-[18px] object-cover object-top sm:h-56"
                       onError={() => handleThumbnailError(template._id)}
                     />
                   ) : (
-                    <div className="flex h-56 items-center justify-center rounded-[18px] bg-white text-center text-sm font-medium text-slate-500 dark:bg-slate-950 dark:text-slate-300">
+                    <div className="flex h-48 items-center justify-center rounded-[18px] bg-white px-4 text-center text-sm font-medium text-slate-500 dark:bg-slate-950 dark:text-slate-300 sm:h-56">
                       Preview available in modal
                     </div>
                   )}
                 </div>
 
                 <div className="mt-5 flex-1">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="min-w-0">
+                      <h3 className="break-words text-xl font-semibold text-slate-950 dark:text-white sm:text-2xl">
                         {template.title}
                       </h3>
-                      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                      <p className="mt-1 break-words text-sm text-slate-500 dark:text-slate-400">
                         {template.category}
                       </p>
                     </div>
                     {template.isFeatured ? (
-                      <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-500/15 dark:text-amber-200">
+                      <span className="self-start rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-500/15 dark:text-amber-200">
                         Featured
                       </span>
                     ) : null}
                   </div>
-                  <p className="mt-4 text-sm text-slate-600 dark:text-slate-300">
+                  <p className="mt-4 break-words text-sm text-slate-600 dark:text-slate-300">
                     {template.description}
                   </p>
                 </div>
 
-                <div className="mt-6 flex gap-3">
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                   <button
                     type="button"
-                    className="btn-secondary flex-1"
+                    className="btn-secondary w-full sm:flex-1"
                     onClick={() => setPreviewItem(template)}
                   >
                     <Eye size={16} />
@@ -140,7 +136,7 @@ const ResumeTemplatesPage = () => {
                   </button>
                   <button
                     type="button"
-                    className="btn-primary flex-1"
+                    className="btn-primary w-full sm:flex-1"
                     onClick={() => handleDownload(fileUrl, template.title)}
                   >
                     <Download size={16} />

@@ -30,11 +30,6 @@ import {
 } from "../services/resumeTemplatesService";
 import { toCommaSeparated } from "../utils/formatters";
 
-const assetBaseUrl = (import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api").replace(
-  /\/api\/?$/,
-  ""
-);
-
 const tabs = [
   { label: "Jobs", value: "jobs" },
   { label: "Internships", value: "internships" },
@@ -62,7 +57,7 @@ const blankTemplateForm = {
   title: "",
   category: "",
   description: "",
-  fileUrl:"",
+  fileUrl: "",
   isFeatured: false,
   templateFile: null
 };
@@ -80,18 +75,17 @@ const blankCategoryForm = {
 
 const AdminDashboardPage = () => {
   useDocumentTitle("Admin Dashboard");
+
   const { admin, logout } = useAuth();
 
   const [activeTab, setActiveTab] = useState("jobs");
   const [pageLoading, setPageLoading] = useState(true);
   const [busy, setBusy] = useState("");
   const [notice, setNotice] = useState({ type: "info", message: "" });
-
   const [jobs, setJobs] = useState([]);
   const [internships, setInternships] = useState([]);
   const [templates, setTemplates] = useState([]);
   const [categories, setCategories] = useState([]);
-
   const [jobForm, setJobForm] = useState(blankOpportunityForm);
   const [internshipForm, setInternshipForm] = useState(blankOpportunityForm);
   const [templateForm, setTemplateForm] = useState(blankTemplateForm);
@@ -100,6 +94,7 @@ const AdminDashboardPage = () => {
 
   const setErrorNotice = (message) => setNotice({ type: "error", message });
   const setSuccessNotice = (message) => setNotice({ type: "success", message });
+
   const handleAdminRequestError = (requestError, fallbackMessage) => {
     if (requestError.response?.status === 401) {
       logout();
@@ -166,6 +161,7 @@ const AdminDashboardPage = () => {
 
     try {
       setBusy("jobs");
+
       if (jobForm.id) {
         await updateJob(jobForm.id, jobForm);
         setSuccessNotice("Job updated successfully.");
@@ -188,6 +184,7 @@ const AdminDashboardPage = () => {
 
     try {
       setBusy("internships");
+
       if (internshipForm.id) {
         await updateInternship(internshipForm.id, internshipForm);
         setSuccessNotice("Internship updated successfully.");
@@ -210,6 +207,7 @@ const AdminDashboardPage = () => {
 
     try {
       setBusy("templates");
+
       const formData = new FormData();
       formData.append("title", templateForm.title);
       formData.append("category", templateForm.category);
@@ -225,7 +223,6 @@ const AdminDashboardPage = () => {
         await updateResumeTemplate(templateForm.id, formData);
         setSuccessNotice("Resume template updated successfully.");
       } else {
-        // Allow either a file upload OR a pasted Cloudinary URL
         if (!templateForm.templateFile && !templateForm.fileUrl?.trim()) {
           throw new Error("Please upload a file or paste a Cloudinary URL.");
         }
@@ -418,7 +415,6 @@ const AdminDashboardPage = () => {
           onDelete={handleDeleteTemplate}
           onCancel={() => setTemplateForm(blankTemplateForm)}
           onPreview={setPreviewItem}
-          assetBaseUrl={assetBaseUrl}
           busy={busy === "templates"}
         />
       );
@@ -450,18 +446,18 @@ const AdminDashboardPage = () => {
   };
 
   return (
-    <div className="page-wrap space-y-8">
+    <div className="page-wrap space-y-6 sm:space-y-8">
       <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <SectionHeader
           eyebrow="Admin Dashboard"
           title="Manage jobs, internships, resume templates, and AI category prompts"
           description="Public visitors stay account-free, while the admin workspace is now protected by a dedicated login."
         />
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          <div className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-center text-sm font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100">
             Signed in as {admin?.email}
           </div>
-          <button type="button" className="btn-secondary" onClick={logout}>
+          <button type="button" className="btn-secondary w-full sm:w-auto" onClick={logout}>
             <LogOut size={16} />
             Logout
           </button>
@@ -470,7 +466,7 @@ const AdminDashboardPage = () => {
 
       <FeedbackBanner type={notice.type} message={notice.message} />
 
-      <div className="glass-panel-strong space-y-6 p-6 sm:p-8">
+      <div className="glass-panel-strong space-y-6 p-4 sm:p-6 lg:p-8">
         <DashboardTabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
         {renderActiveSection()}
       </div>
