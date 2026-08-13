@@ -1,5 +1,6 @@
 import { LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import DashboardTabs from "../components/DashboardTabs";
 import FeedbackBanner from "../components/FeedbackBanner";
 import InterviewCategoryManager from "../components/InterviewCategoryManager";
@@ -457,6 +458,9 @@ const AdminDashboardPage = () => {
           <div className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-center text-sm font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-100">
             Signed in as {admin?.email}
           </div>
+          <Link to="/admin/blogs" className="btn-secondary w-full sm:w-auto">
+            Manage Blogs
+          </Link>
           <button type="button" className="btn-secondary w-full sm:w-auto" onClick={logout}>
             <LogOut size={16} />
             Logout

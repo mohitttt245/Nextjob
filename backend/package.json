@@ -18,7 +18,8 @@
     "mongoose": "^8.8.1",
     "multer": "^2.0.2",
     "multer-storage-cloudinary": "^4.0.0",
-    "openai": "^4.76.0"
+    "openai": "^4.76.0",
+    "slugify": "^1.6.9"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"

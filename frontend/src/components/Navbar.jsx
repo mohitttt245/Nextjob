@@ -9,6 +9,7 @@ const baseNavigation = [
   { label: "Home", to: "/" },
   { label: "Jobs", to: "/jobs" },
   { label: "Internships", to: "/internships" },
+  { label: "Blog", to: "/blog" },
   { label: "AI Preparation", to: "/ai-interview" },
   { label: "Templates", to: "/resume-templates" },
   { label: "Resume Builder", to: "/resume-builder" }

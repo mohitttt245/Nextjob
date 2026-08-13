@@ -10,6 +10,7 @@ import internshipRoutes from "./routes/internshipRoutes.js";
 import resumeTemplateRoutes from "./routes/resumeTemplateRoutes.js";
 import interviewRoutes from "./routes/interviewRoutes.js";
 import downloadRoute from "./routes/downloadRoute.js";
+import blogRoutes from "./routes/blogRoutes.js";
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ app.get("/api/health", (_req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/internships", internshipRoutes);
+app.use("/api/blogs", blogRoutes);
 app.use("/api/resume-templates", resumeTemplateRoutes);
 app.use("/api/interviews", interviewRoutes);
 app.use("/api", downloadRoute);        // ← moved here, after app is initialized
